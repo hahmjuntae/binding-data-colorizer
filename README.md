@@ -2,8 +2,6 @@
 
 - HTML에 데이터 바인딩 된 `핸들바(handlebar)` & `템플릿 언더바(template underscore)` 문법에 색상을 지정할 수 있습니다.
 
-![](demo.gif)
-
 ## 사용법
 
 >Preference(설정) - 'Binding Data Colorizer' 검색 - 옵션 수정
