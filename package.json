@@ -2,7 +2,7 @@
     "name": "binding-data-colorizer",
     "displayName": "Binding data Colorizer",
     "description": "Color the handlebar and template underscore syntax in html",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "publisher": "JunTaeHahm",
     "icon": "icon.png",
     "engines": {
@@ -48,6 +48,21 @@
                     "default": 500,
                     "minimum": 0,
                     "description": "Debounce duration in milliseconds for colorizing data after changes in the document."
+                },
+                "bracketColorizer.borderColor": {
+                    "type": "string",
+                    "default": "#000000",
+                    "description": "Enter border-color to emphasize the handlebar and underscore syntax."
+                },
+                "bracketColorizer.borderRadius": {
+                    "type": "string",
+                    "default": "3px",
+                    "description": "Enter border-radius to emphasize the handlebar and underscore syntax."
+                },
+                "bracketColorizer.fontWeight": {
+                    "type": "string",
+                    "default": "bold",
+                    "description": "Enter font-weight-color to emphasize the handlebar and underscore syntax."
                 }
             }
         }

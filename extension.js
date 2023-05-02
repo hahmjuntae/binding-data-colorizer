@@ -1,22 +1,25 @@
 const vscode = require('vscode');
 
-let enabled = true; // 기본적으로 중괄호 강조 활성화
-let timeout = undefined; // 디바운스에 사용될 타임아웃 값
-
+let enabled = true;
+let timeout = undefined;
 
 function activate(context) {
-    // 설정에서 color와 backgroundColor 값을 가져온다
     const config = vscode.workspace.getConfiguration('bindingDataColorizer');
     let color = config.get('color') || 'red';
     let backgroundColor = config.get('backgroundColor') || 'transparent';
-	let debounceDuration = config.get('debounceDuration') || 500;
+    let borderColor = config.get('borderColor') || '#000000';
+    let borderRadius = config.get('borderRadius') || '3px';
+    let fontWeight = config.get('fontWeight') || 'bold';
+    let debounceDuration = config.get('debounceDuration') || 500;
 
     let decorationType = vscode.window.createTextEditorDecorationType({
         color: color,
         backgroundColor: backgroundColor,
+        border: `1px solid ${borderColor}`,
+        borderRadius: borderRadius,
+        fontWeight: fontWeight,
     });
 
-    // 중괄호 강조에 사용할 장식 타입을 생성한다
     let activeEditor = vscode.window.activeTextEditor;
     if (activeEditor && activeEditor.document.languageId === 'html') {
         updateDecorations(activeEditor, decorationType);
@@ -33,7 +36,6 @@ function activate(context) {
         }, debounceDuration);
     }
 
-    // 현재 활성화된 텍스트 에디터가 HTML 파일이면, 해당 에디터에 대한 강조를 업데이트한다
     const toggleCommand = vscode.commands.registerCommand('bindingDataColorizer.toggle', () => {
         enabled = !enabled;
         if (enabled) {
@@ -47,7 +49,7 @@ function activate(context) {
         }
     });
 
-    context.subscriptions.push(toggleCommand); // 등록된 명령을 컨텍스트에 추가한다
+    context.subscriptions.push(toggleCommand);
 
     vscode.window.onDidChangeActiveTextEditor(
         (editor) => {
@@ -127,6 +129,19 @@ function updateDecorations(editor, decorationType) {
 
     const doc = editor.document;
     const decorations = [];
+    const regex = /<!--\s*\{[\s\S]*?\}\s*-->|\{[\s\S]*?\}/g;
+
+    for (let line = 0; line < doc.lineCount; line++) {
+        const lineText = doc.lineAt(line).text;
+        let match;
+
+        while ((match = regex.exec(lineText)) !== null) {
+            const startPos = new vscode.Position(line, match.index);
+            const endPos = new vscode.Position(line, match.index + match[0].length);
+            const decoration = { range: new vscode.Range(startPos, endPos) };
+            decorations.push(decoration);
+        }
+    }
 
     for (let line = 0; line < doc.lineCount; line++) {
         const lineText = doc.lineAt(line).text;
