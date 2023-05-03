@@ -5,12 +5,12 @@ let timeout = undefined;
 
 function activate(context) {
     const config = vscode.workspace.getConfiguration('bindingDataColorizer');
-    let color = config.get('color') || 'red';
-    let backgroundColor = config.get('backgroundColor') || 'transparent';
-    let borderColor = config.get('borderColor') || '#000000';
-    let borderRadius = config.get('borderRadius') || '3px';
-    let fontWeight = config.get('fontWeight') || 'bold';
-    let debounceDuration = config.get('debounceDuration') || 500;
+    const color = config.get('color') || 'red';
+    const backgroundColor = config.get('backgroundColor') || 'transparent';
+    const borderColor = config.get('borderColor') || 'rgba(255, 255, 255, 0.8)';
+    const borderRadius = config.get('borderRadius') || '3px';
+    const fontWeight = config.get('fontWeight') || 'bold';
+    const debounceDuration = config.get('debounceDuration') || 500;
 
     let decorationType = vscode.window.createTextEditorDecorationType({
         color: color,
@@ -107,10 +107,17 @@ function activate(context) {
                 const config = vscode.workspace.getConfiguration('bindingDataColorizer');
                 const newColor = config.get('color') || 'red';
                 const newBackgroundColor = config.get('backgroundColor') || 'transparent';
+                const newBorderColor = config.get('borderColor') || '#000000';
+                const newBorderRadius = config.get('borderRadius') || '3px';
+                const newfontWeight = config.get('fontWeight') || 'bold';
+
                 decorationType.dispose();
                 decorationType = vscode.window.createTextEditorDecorationType({
                     color: newColor,
                     backgroundColor: newBackgroundColor,
+                    border: `1px solid ${newBorderColor}`,
+                    borderRadius: newBorderRadius,
+                    fontWeight: newfontWeight,
                 });
                 if (activeEditor && activeEditor.document.languageId === 'html') {
                     updateDecorations(activeEditor, decorationType);
