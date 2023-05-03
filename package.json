@@ -2,7 +2,7 @@
     "name": "binding-data-colorizer",
     "displayName": "Binding data Colorizer",
     "description": "Color the handlebar and template underscore syntax in html",
-    "version": "0.1.2",
+    "version": "0.1.3",
     "publisher": "JunTaeHahm",
     "icon": "icon.png",
     "engines": {

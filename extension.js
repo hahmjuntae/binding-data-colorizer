@@ -102,7 +102,10 @@ function activate(context) {
         (event) => {
             if (
                 event.affectsConfiguration('bindingDataColorizer.color') ||
-                event.affectsConfiguration('bindingDataColorizer.backgroundColor')
+                event.affectsConfiguration('bindingDataColorizer.backgroundColor') ||
+                event.affectsConfiguration('bindingDataColorizer.borderColor') ||
+                event.affectsConfiguration('bindingDataColorizer.borderRadius') ||
+                event.affectsConfiguration('bindingDataColorizer.fontWeight')
             ) {
                 const config = vscode.workspace.getConfiguration('bindingDataColorizer');
                 const newColor = config.get('color') || 'red';
