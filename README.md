@@ -27,4 +27,4 @@ Preference(설정) - 'Binding Data Colorizer' 검색 - 옵션 수정
 
 ## 버그 및 기능 제안
 
-ahuuae@icloud.com
+hahmjuntae@icloud.com
