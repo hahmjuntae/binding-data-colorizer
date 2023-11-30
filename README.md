@@ -4,6 +4,14 @@
 
 ---
 
+
+
+## 설치
+
+- 프로젝트 클론 후 npm i
+- npm run package 실행
+- 루트폴더에 생긴 .visx 파일 수동 설치 후 사용
+
 ## 사용법
 
 Preference(설정) - 'Binding Data Colorizer' 검색 - 옵션 수정
